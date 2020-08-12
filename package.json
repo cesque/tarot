@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "components": "^0.1.0",
+    "fuse.js": "^6.4.0",
+    "vue": "^2.6.11",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-router": "^3.3.4",
+    "vuex": "^3.5.1"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.1.2",
+    "sass": "^1.26.10",
+    "typescript": "^3.9.7",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
