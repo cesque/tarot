@@ -28,14 +28,14 @@
                 </div>
             </div>
 
-            <div class="meanings__next" v-if="card">
+            <div class="meanings__next" v-if="card" v-on:click="scrollToNextPage($event)">
                 <icon name="chevron-down"></icon>
             </div>
         </div>
         <div class="meanings__page meanings__page--information" v-if="card">
-            <div class="information" v-if="card.elemental">
+            <div class="information" v-if="card.element">
                 <div class="information__header">Elemental</div>
-                <div class="information__text">{{ card.elemental }}</div>
+                <div class="information__text">{{ card.element }}</div>
             </div> 
             <div class="information" v-if="card.archetype">
                 <div class="information__header">Archetype</div>
@@ -68,18 +68,20 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import Vue from 'vue'
     import Fuse from 'fuse.js'
 
     import TarotCard from '../components/TarotCard.vue'
     import Icon from '../components/Icon.vue'
 
+    import { Card } from '../models/card'
+
     export default Vue.extend({
         data() {
             return {
                 searchText: '',
-                card: null,
+                card: null as Card,
                 isReversed: false,
                 suggestions: [],
             }
@@ -104,17 +106,27 @@
             },
             reverse: function() {
                 this.isReversed = !this.isReversed
+            },
+            scrollToNextPage(event) {
+                let next = event.target.closest('.meanings__page').nextElementSibling
+
+                if(next) {
+                    next.scrollIntoView({
+                        block: 'start',
+                        behavior: 'smooth',
+                    })
+                }
             }
         },
         computed: {
             meanings: function() {
-                return this.card.meanings.new[this.isReversed ? 'reversed' : 'upright']
+                return this.card.meanings[this.isReversed ? 'reversed' : 'upright']
             },
             labyrinthosLink: function() {
                 // might rewrite link behaviour
                 let slug = this.card.name.toLowerCase().split(/\s+/).join('-')
                 
-                return `https://labyrinthos.co/blogs/tarot-card-meanings-list/${slug}-meaning-${this.card.isMajorArcana ? 'major-arcana-' : ''}tarot-card-meanings`
+                return `https://labyrinthos.co/blogs/tarot-card-meanings-list/${slug}-meaning-${this.card.isMajorArcana() ? 'major-arcana-' : ''}tarot-card-meanings`
             }
         },
         components: {
@@ -264,6 +276,7 @@
         width: 50px;
         height: 50px;
         display: none;
+        cursor: pointer;
 
         .icon {
             color: var(--color-mid);
@@ -271,6 +284,12 @@
 
         @media (min-width: $breakpoint-sm) {
             display: block;
+        }
+
+        &:hover {
+            .icon {
+                color: var(--color-fg);
+            }
         }
     }
 
