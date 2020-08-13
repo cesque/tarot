@@ -13,7 +13,7 @@
                         size="large"
                         v-on:reverse="reverse"
                     ></tarot-card>
-                    <div class="meanings__reverse-instruction">click card to reverse</div>
+                    <div class="meanings__reverse-instruction" v-if="card">click card to reverse</div>
                 </div>
 
                 <div class="search-instructions" v-if="!card">
