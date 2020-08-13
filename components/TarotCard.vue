@@ -28,16 +28,17 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import Vue from 'vue'
+    import { Size } from '../models/size'
 
     export default Vue.extend({
         props: {
             card: Object,
             reversed: Boolean,
             size: {
-                type: String,
-                default: "small"
+                type: Object as () => Size,
+                default: Size.Small
             },
         },
         data() {

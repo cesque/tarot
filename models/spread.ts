@@ -1,4 +1,5 @@
 import { Card } from "./card"
+import { Size } from "./size"
 
 export class SpreadCard {
     position: {
@@ -6,6 +7,7 @@ export class SpreadCard {
         y: number
     }
     rotation: number
+    size: Size
     layer: number
     number: number
     name: string

@@ -81,6 +81,7 @@
             height: 100vh;
             width: auto;
             padding: 150px 20px;
+            border: none;
             border-right: 1px solid var(--color-fg);
         }
     }
