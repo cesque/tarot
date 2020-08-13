@@ -8,8 +8,10 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import Vue from 'vue'
+
+    import { Spread, SpreadCard } from '../models/spread'
 
     export default Vue.extend({
         data() {

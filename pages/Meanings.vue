@@ -10,7 +10,7 @@
                     <tarot-card
                         v-bind:card="card"
                         v-bind:reversed="isReversed"
-                        size="large"
+                        v-bind:size="size"
                         v-on:reverse="reverse"
                     ></tarot-card>
                     <div class="meanings__reverse-instruction" v-if="card">click card to reverse</div>
@@ -76,6 +76,7 @@
     import Icon from '../components/Icon.vue'
 
     import { Card } from '../models/card'
+    import { Size } from '../models/size'
 
     export default Vue.extend({
         data() {
@@ -84,6 +85,8 @@
                 card: null as Card,
                 isReversed: false,
                 suggestions: [],
+
+                size: Size.Large as Size,
             }
         },
         methods: {

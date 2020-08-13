@@ -44,6 +44,19 @@ export class Card {
             upright: object.meanings.new.upright,
             reversed: object.meanings.new.reversed,
         },
+
+        card.arcana = object.arcana == 'Major Arcana' ? Arcana.Major : Arcana.Minor
+
+        let suits = {
+            Trump: Suit.Trump,
+            Swords: Suit.Swords,
+            Wands: Suit.Wands,
+            Cups: Suit.Cups,
+            Pentacles: Suit.Pentacles,
+        }
+
+        card.suit = suits[object.suit]
+
         card.searchKey = object.searchKey
         card.questions = object.questions
         card.fortunes = object.fortuneTelling

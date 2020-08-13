@@ -2,8 +2,9 @@
     <div class="tarot-card__container">
         <div class="tarot-card" v-bind:class="{ 
             reversed,
-            'tarot-card--small': size == 'small',
-            'tarot-card--large': size == 'large',
+            'tarot-card--small': sizeValue == Size.Small,
+            'tarot-card--medium': sizeValue == Size.Medium,
+            'tarot-card--large': sizeValue == Size.Large,
         }" v-on:click="reverse">
             <div class="tarot-card__inner" v-if="card">
                 <div class="tarot-card__top" v-bind:class="{ active: reversed }">
@@ -12,10 +13,10 @@
 
                 <div class="tarot-card__middle">
                     <div class="tarot-card__symbol">
-                        <div class="tarot-card__suit" v-if="!card.isMajorArcana">{{ suitSymbol }}</div>
-                        <div class="tarot-card__number" v-if="!card.isMajorArcana">{{ card.number }}</div>
+                        <div class="tarot-card__suit" v-if="!card.isMajorArcana()">{{ suitSymbol }}</div>
+                        <div class="tarot-card__number" v-if="!card.isMajorArcana()">{{ card.number }}</div>
 
-                        <div class="tarot-card__number" v-if="card.isMajorArcana">{{ majorArcanaRomanNumeral }}</div>
+                        <div class="tarot-card__number" v-if="card.isMajorArcana()">{{ majorArcanaRomanNumeral }}</div>
                     </div>
                     <div class="tarot-card__reversed" v-if="reversed">reversed</div>
                 </div>
@@ -31,27 +32,33 @@
 <script lang="ts">
     import Vue from 'vue'
     import { Size } from '../models/size'
+import { Suit } from '../models/card'
 
     export default Vue.extend({
         props: {
             card: Object,
             reversed: Boolean,
             size: {
-                type: Object as () => Size,
-                default: Size.Small
+                type: Number,
+                default: 1
             },
         },
         data() {
             return {
-                isReversed: this.reversed
+                isReversed: this.reversed,
+
+                Size
             }
         },
         computed: {
             suitSymbol: function() {
-                return this.card.suit[0]
+                return Suit[this.card.suit][0]
             },
             majorArcanaRomanNumeral: function() {
                 return this.$store.getters.romanNumeral(this.card.number)
+            },
+            sizeValue: function() {
+                return this.size as Size
             }
         },
         methods: {
