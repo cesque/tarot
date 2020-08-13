@@ -1,6 +1,6 @@
 import { Card } from "./card"
 
-class SpreadCard {
+export class SpreadCard {
     position: {
         x: number,
         y: number
@@ -13,7 +13,7 @@ class SpreadCard {
     card: Card
 }
 
-class Spread {
+export class Spread {
     cards: SpreadCard[]
     name: string
     description: string
