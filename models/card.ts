@@ -12,6 +12,7 @@ export enum Suit {
 }
 
 export class Card {
+    id: string
     name: string
     number: number
     arcana: Arcana
@@ -37,6 +38,7 @@ export class Card {
 
     static fromObject(object: any) {
         let card: Card = new Card()
+        card.id = object.id
         card.name = object.name
         card.number = object.number
         // card.reversed = false

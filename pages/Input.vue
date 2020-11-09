@@ -43,14 +43,14 @@
 </script>
 
 <style lang="scss">
-    .card-info {
-        display: flex;
-        flex-direction: column;
-    }
+    // .card-info {
+    //     display: flex;
+    //     flex-direction: column;
+    // }
 
-    button {
-        position: fixed;
-        top: 50px;
-        right: 50px;
-    }
+    // button {
+    //     position: fixed;
+    //     top: 50px;
+    //     right: 50px;
+    // }
 </style>

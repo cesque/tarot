@@ -62,7 +62,7 @@
             <div class="spacer"></div>
             <div class="information" v-if="card">
                 <div class="information__header">Links</div>
-                <a v-bind:href="labyrinthosLink" class="information__text information__text--link" target="_blank">{{ labyrinthosLink }}</a>
+                <router-link v-bind:to="labyrinthosLink" class="information__text information__text--link" target="_blank">{{ labyrinthosLink }}</router-link>
             </div> 
         </div>
     </div>
@@ -119,6 +119,40 @@
                         behavior: 'smooth',
                     })
                 }
+            },
+            updateTitle() {
+                if(this.card) {
+                    window.history.replaceState({}, document.title, '/meanings/' + this.card.id + (this.isReversed ? '-r' : ''))
+                    document.title = this.$store.getters.pageTitle(this.card.name + (this.isReversed ? ' (reversed)' : ''))
+                }
+            },
+        },
+        created: function() {
+            let params = this.$route.params
+
+            if(params.id) {
+                let parts = params.id.split('-')
+
+                let first = parts[0].toLowerCase()
+                let card = this.$store.state.cards.find(card => card.id == first)
+
+                if(card) {
+                    this.card = card
+                }
+                
+                if(parts.length > 1 && parts[1] == 'r') {
+                    this.isReversed = true
+                }
+            }
+        },
+        watch: {
+            card: function(current, previous) {
+                if(current) {
+                   this.updateTitle()
+                }
+            },
+            isReversed: function(current, previous) {
+                this.updateTitle()
             }
         },
         computed: {
@@ -152,7 +186,7 @@
         position: relative;
 
         &.meanings__page--information {
-            padding: 50px;
+            padding: 50px 25px;
         }
     }
 

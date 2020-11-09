@@ -32,7 +32,7 @@
 <script lang="ts">
     import Vue from 'vue'
     import { Size } from '../models/size'
-import { Suit } from '../models/card'
+    import { Suit } from '../models/card'
 
     export default Vue.extend({
         props: {

@@ -4,9 +4,9 @@
             <div class="global-nav__item" v-for="element of computedNav">
                 <div v-if="element.empty"></div>
 
-                <a v-else v-bind:href="element.link" >
+                <router-link v-else v-bind:to="element.link" >
                     <icon v-bind:name="element.icon"></icon>
-                </a>
+                </router-link>
             </div>
         </div>
     </div>

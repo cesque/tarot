@@ -41,7 +41,18 @@ export default Vue.extend({
     <g transform="translate(0,-952.36218)">
         <path style="text-indent:0;text-transform:none;direction:ltr;block-progression:tb;baseline-shift:baseline;color:currentColor;enable-background:accumulate;" d="m 50.281282,1024.3605 a 4.0003998,4.0003998 0 0 0 2.40624,-1 l 40,-35.99996 a 4.0161114,4.0161114 0 1 0 -5.375,-5.9687 l -37.31254,33.59366 -37.3125,-33.59366 a 4.0161114,4.0161114 0 1 0 -5.3749998,5.9687 l 39.9999998,35.99996 a 4.0003998,4.0003998 0 0 0 2.9688,1 z" fill-opacity="1" marker="none" visibility="visible" display="inline" overflow="visible"/>
     </g>
-</svg>`
+</svg>`,
+                'chevron-right': `<svg xmlns:x="http://ns.adobe.com/Extensibility/1.0/"
+    xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/"
+    xmlns:graph="http://ns.adobe.com/Graphs/1.0/"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+    <switch>
+        <g i:extraneous="self">
+            <path d="M29.1,97.5c-1.4,0-2.9-0.5-4-1.6c-2.2-2.2-2.2-5.7,0-7.9L63,50L25.1,12.1c-2.2-2.2-2.2-5.7,0-7.9C27.3,2,30.8,2,33,4.1    L74.9,46c1.1,1.1,1.6,2.5,1.6,4c0,1.5-0.6,2.9-1.6,4L33,95.9C31.9,97,30.5,97.5,29.1,97.5z"/>
+        </g>
+    </switch>
+</svg>`,
             }
         }
     }

@@ -3,12 +3,16 @@ import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 
 import Tarot from './tarot'
+import DefaultSpreads from './defaultSpreads'
+
+console.log(DefaultSpreads)
 
 import App from './App.vue'
 import Meanings from './pages/Meanings.vue'
 import About from './pages/About.vue'
 import Input from './pages/Input.vue'
 import Spreads from './pages/Spreads.vue'
+import Spread from './pages/Spread.vue'
 
 import { Card } from './models/card'
 
@@ -18,7 +22,7 @@ Vue.use(Vuex)
 let cards: Card[] = Tarot.cards.map(card => Card.fromObject(card))
 
 function makePageTitle(name) {
-    let siteName = 'tarot'
+    let siteName = 'hierophant.app'
     if (!name) {
         return siteName
     }
@@ -30,10 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const store = new Vuex.Store({
         state: {
             cards: cards,
+            spreads: DefaultSpreads,
+            fonts: {
+                mono: "'Overpass Mono', monospace"
+            },
             colors: {
-                bg: '#8a5a44',
-                mid: '#d69f7e',
-                fg: '#edc4b3',
+                bg: '#0a3d62',
+                mid: '#f6b93b',
+                fg: '#b8e994',
+                // bg: '#fff',
+                // mid: '#ED4C67',
+                // fg: '#000',
             }
         },
         mutations: {
@@ -66,12 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
                 return roman
-            }
+            },
+            pageTitle: state => makePageTitle,
         }
     })
 
     let router = new VueRouter({
-        mode: 'history',
+        // mode: 'history',
         routes: [
             {
                 path: '/',
@@ -81,7 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             },
             {
-                path: '/meanings',
+                path: '/meanings/',
+                component: Meanings,
+                meta: {
+                    title: makePageTitle('card meanings')
+                }
+            },
+            {
+                path: '/meanings/:id',
                 component: Meanings,
                 meta: {
                     title: makePageTitle('card meanings')
@@ -92,6 +111,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 component: Spreads,
                 meta: {
                     title: makePageTitle('spreads')
+                }
+            },
+            {
+                path: '/spread/:id',
+                component: Spread,
+                meta: {
+                    title: makePageTitle('spread')
                 }
             },
             {

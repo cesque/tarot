@@ -22,6 +22,7 @@ export default Vue.extend({
                 '--color-bg': this.$store.state.colors.bg,
                 '--color-mid': this.$store.state.colors.mid,
                 '--color-fg': this.$store.state.colors.fg,
+                '--font-mono': this.$store.state.fonts.mono,
             }
         }
     },

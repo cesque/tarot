@@ -9,8 +9,26 @@
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.1.2",
+    "cssnano": "^4.1.10",
     "sass": "^1.26.10",
     "typescript": "^3.9.7",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "name": "tarot",
+  "version": "0.4.0",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cesque/tarot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cesque/tarot/issues"
+  },
+  "homepage": "https://github.com/cesque/tarot#readme",
+  "description": ""
 }
