@@ -122,7 +122,7 @@
             },
             updateTitle() {
                 if(this.card) {
-                    window.history.replaceState({}, document.title, '/meanings/' + this.card.id + (this.isReversed ? '-r' : ''))
+                    window.history.replaceState({}, document.title, '/#/meanings/' + this.card.id + (this.isReversed ? '-r' : ''))
                     document.title = this.$store.getters.pageTitle(this.card.name + (this.isReversed ? ' (reversed)' : ''))
                 }
             },
@@ -143,6 +143,12 @@
                 if(parts.length > 1 && parts[1] == 'r') {
                     this.isReversed = true
                 }
+            }
+
+            for(let card of this.$store.state.cards) {
+                let slug = card.name.toLowerCase().split(/\s+/).join('-')
+                
+                return `https://labyrinthos.co/blogs/tarot-card-meanings-list/${slug}-meaning-${card.isMajorArcana() ? 'major-arcana-' : ''}tarot-card-meanings`
             }
         },
         watch: {
