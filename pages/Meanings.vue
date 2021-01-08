@@ -62,7 +62,10 @@
             <div class="spacer"></div>
             <div class="information" v-if="card">
                 <div class="information__header">Links</div>
-                <router-link v-bind:to="labyrinthosLink" class="information__text information__text--link" target="_blank">{{ labyrinthosLink }}</router-link>
+                <div class="information__list">
+                    <a v-bind:href="labyrinthosLink" class="information__text information__text--link" target="_blank">{{ cleanURL(labyrinthosLink) }}</a>
+                    <a v-bind:href="biddyLink" class="information__text information__text--link" target="_blank">{{ cleanURL(biddyLink) }}</a>
+                </div>
             </div> 
         </div>
     </div>
@@ -126,6 +129,14 @@
                     document.title = this.$store.getters.pageTitle(this.card.name + (this.isReversed ? ' (reversed)' : ''))
                 }
             },
+            cleanURL(urlString) {
+                let url = new URL(urlString)
+                console.log(url)
+
+                let host = url.host.replace(/^www\./, '')
+
+                return host
+            }
         },
         created: function() {
             let params = this.$route.params
@@ -144,12 +155,6 @@
                     this.isReversed = true
                 }
             }
-
-            for(let card of this.$store.state.cards) {
-                let slug = card.name.toLowerCase().split(/\s+/).join('-')
-                
-                return `https://labyrinthos.co/blogs/tarot-card-meanings-list/${slug}-meaning-${card.isMajorArcana() ? 'major-arcana-' : ''}tarot-card-meanings`
-            }
         },
         watch: {
             card: function(current, previous) {
@@ -167,9 +172,27 @@
             },
             labyrinthosLink: function() {
                 // might rewrite link behaviour
-                let slug = this.card.name.toLowerCase().split(/\s+/).join('-')
-                
+                let name = this.card.name
+                if(name == 'Wheel of Fortune') name = 'The ' + name // labyrinthos link for WoF has 'The'
+
+                let slug = name.toLowerCase().split(/\s+/).join('-')
+
                 return `https://labyrinthos.co/blogs/tarot-card-meanings-list/${slug}-meaning-${this.card.isMajorArcana() ? 'major-arcana-' : ''}tarot-card-meanings`
+            },
+            biddyLink: function() {
+                // might rewrite link behaviour
+                let name = this.card.name
+
+                name = name.replace(/^[Tt]he\s*/, '')
+
+                let slug = name.toLowerCase().split(/\s+/).join('-')
+
+                if(this.card.isMajorArcana()) {
+                    return `https://www.biddytarot.com/tarot-card-meanings/major-arcana/${slug}/`
+                } else {
+                    return `https://www.biddytarot.com/tarot-card-meanings/minor-arcana/suit-of-${this.card.suitName().toLowerCase()}/${slug}/`
+                }
+
             }
         },
         components: {
@@ -375,6 +398,7 @@
             color: var(--color-fg);
             text-decoration: underline;
             word-break: break-all;
+            margin-bottom: 10px;
         }
     }
 

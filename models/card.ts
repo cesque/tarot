@@ -36,6 +36,10 @@ export class Card {
         return this.arcana == Arcana.Major
     }
 
+    suitName() {
+        return Suit[+this.suit]
+    }
+
     static fromObject(object: any) {
         let card: Card = new Card()
         card.id = object.id
