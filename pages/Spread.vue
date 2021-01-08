@@ -420,7 +420,11 @@
     }
 
     .list-card__content {
-        margin: 20px 40px;
+        margin: 20px 20px;
+
+        @media (min-width: $breakpoint-sm) {
+            margin: 20px 40px;
+        }
     }
 
     .list-card__content-header {

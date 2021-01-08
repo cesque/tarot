@@ -42,6 +42,8 @@ export default Vue.extend({
         background: var(--color-bg);
         color: var(--color-fg);
 
+        min-height: 100vh;
+
         @media (min-width: $breakpoint-lg) {
             height: 100vh;
             flex-direction: row;
