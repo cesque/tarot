@@ -33,7 +33,7 @@
                     <div class="list-card__header">
                         <div class="list-card__number">{{ $store.getters.romanNumeral(card.number) }}</div>
                         <div class="list-card__name">{{ card.name }}</div>
-                        <div class="list-card__seperator"></div>
+                        <div class="list-card__separator"></div>
                         <div class="list-card__card-name" v-if="card.card">{{ card.card[0].name }}</div>
                         <div class="list-card__card-reversed" v-if="card.card && card.card[1]">Reversed</div>
                     </div>
@@ -399,7 +399,7 @@
         text-align: right;
     }
 
-    .list-card__seperator {
+    .list-card__separator {
         flex-grow: 1;
         height: 1px;
         background: var(--color-mid);
