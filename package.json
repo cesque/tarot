@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "components": "^0.1.0",
     "fuse.js": "^6.4.0",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.4",
@@ -16,9 +15,11 @@
     "typescript": "^3.9.7",
     "vue-template-compiler": "^2.6.11"
   },
-  "browserslist": [ "last 2 Chrome versions" ],
+  "browserslist": [
+    "last 2 Chrome versions"
+  ],
   "name": "tarot",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

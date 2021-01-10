@@ -1,11 +1,11 @@
+import packageJSON from "./package.json"
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 
 import Tarot from './tarot'
 import DefaultSpreads from './defaultSpreads'
-
-console.log(DefaultSpreads)
 
 import App from './App.vue'
 import Meanings from './pages/Meanings.vue'
@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         state: {
             cards: cards,
             spreads: DefaultSpreads,
+            siteVersion: packageJSON.version,
             config: {
                 fonts: {
                     mono: config.fonts.mono

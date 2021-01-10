@@ -81,6 +81,11 @@
                 <b>Cards</b> by <b>Dmitriy Ivanov</b> from the Noun Project
             </p>
 
+            <hr> 
+
+            <p>
+                Site version: <b>{{ siteVersion }}</b>
+            </p>
         </div>
     </div>
 </template>
@@ -91,7 +96,7 @@
     export default Vue.extend({
         data() {
             return {
-
+                siteVersion: this.$store.state.siteVersion,
             }
         },
         methods: {
