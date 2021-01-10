@@ -116,7 +116,8 @@
 
         hr {
             margin: 40px 0;
-            border-color: var(--color-mid);
+            border: none;
+            border-bottom: 1px solid var(--color-mid);
         }
 
         b {
