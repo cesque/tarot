@@ -19,7 +19,7 @@
     "last 2 Chrome versions"
   ],
   "name": "tarot",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

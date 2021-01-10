@@ -261,7 +261,7 @@
     appearance: none;
     background: white;
     color: black;
-    border: none;
+    border: 1px solid black;
     outline: none;
     font-family: var(--font-mono);
     text-transform: uppercase;
