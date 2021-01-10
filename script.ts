@@ -13,6 +13,7 @@ import About from './pages/About.vue'
 import Input from './pages/Input.vue'
 import Spreads from './pages/Spreads.vue'
 import Spread from './pages/Spread.vue'
+import Settings from './pages/Settings.vue'
 
 import { Card } from './models/card'
 
@@ -30,27 +31,74 @@ function makePageTitle(name) {
     return siteName + ' | ' + name
 }
 
+let defaults = {
+    fonts: {
+        mono: "'Overpass Mono', monospace"
+    },
+    colors: {
+        bg: '#0a3d62',
+        mid: '#f6b93b',
+        fg: '#b8e994',
+    },
+}
+
+let loadedConfig = JSON.parse(localStorage.getItem('config'))
+
+let config = {
+    fonts: {
+        mono: loadedConfig?.fonts?.mono ?? defaults.fonts.mono
+    },
+    colors: {
+        bg: loadedConfig?.colors?.bg ?? defaults.colors.bg,
+        mid: loadedConfig?.colors?.mid ?? defaults.colors.mid,
+        fg: loadedConfig?.colors?.fg ?? defaults.colors.fg,
+    },
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const store = new Vuex.Store({
         state: {
             cards: cards,
             spreads: DefaultSpreads,
-            fonts: {
-                mono: "'Overpass Mono', monospace"
+            config: {
+                fonts: {
+                    mono: config.fonts.mono
+                },
+                colors: {
+                    bg: config.colors.bg,
+                    mid: config.colors.mid,
+                    fg: config.colors.fg,
+                },
             },
-            colors: {
-                bg: '#0a3d62',
-                mid: '#f6b93b',
-                fg: '#b8e994',
-                // bg: '#fff',
-                // mid: '#ED4C67',
-                // fg: '#000',
-            }
+            defaults: {
+                fonts: {
+                    mono: config.fonts.mono
+                },
+                colors: {
+                    bg: config.colors.bg,
+                    mid: config.colors.mid,
+                    fg: config.colors.fg,
+                },
+            },
+            temporaryConfig: null
         },
         mutations: {
-            doSomething: (state, param) => {
-                // state.test = param
+            saveConfig: (state, config) => {
+                console.log(config)
+                for(let key in config.colors) {
+                    state.config.colors[key] = config.colors[key]
+                }
+
+                if(config.fonts.mono) {
+                    state.config.fonts.mono = config.fonts.mono
+                }
             },
+            setTemporaryConfig: (state, config) => {
+                state.temporaryConfig = config
+            },
+            clearTemporaryConfig: state => {
+                state.temporaryConfig = null
+            }
         },
         getters: {
             test: state => param => {
@@ -79,6 +127,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 return roman
             },
             pageTitle: state => makePageTitle,
+        },
+        actions: {
+            saveConfig (context, config) {
+                context.commit('saveConfig', config)
+                try {
+                    localStorage.setItem('config', JSON.stringify(context.state.config))
+                    return true
+                } catch(e) {
+                    console.error('failed to save config to localstorage!')
+                    console.error(e)
+                    return false
+                }
+            }
         }
     })
 
@@ -125,6 +186,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 component: About,
                 meta: {
                     title: makePageTitle('about')
+                }
+            },
+            {
+                path: '/settings',
+                component: Settings,
+                meta: {
+                    title: makePageTitle('settings')
                 }
             },
             {

@@ -27,9 +27,10 @@
                         { link: '/meanings', icon: 'book', title: 'meanings' },
                         { link: '/spreads', icon: 'spread', title: 'spreads' },
                     ],
-                    middle: { link: '/', icon: 'site-logo', title: 'home' },
+                    middle: { link: '/', icon: 'hierophant', title: 'home' },
                     bottom: [
-                        // { link: '/about', icon: 'about', title: 'about' },
+                        { link: '/settings', icon: 'settings', title: 'settings' },
+                        { link: '/about', icon: 'about2', title: 'about' },
                     ]
                 }
             }

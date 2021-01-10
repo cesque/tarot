@@ -18,12 +18,22 @@ export default Vue.extend({
     },
     computed: {
         cssVariables: function() {
-            return {
-                '--color-bg': this.$store.state.colors.bg,
-                '--color-mid': this.$store.state.colors.mid,
-                '--color-fg': this.$store.state.colors.fg,
-                '--font-mono': this.$store.state.fonts.mono,
+            if(this.$store.state.temporaryConfig) {
+                return {
+                    '--color-bg': this.$store.state.temporaryConfig.colors.bg,
+                    '--color-mid': this.$store.state.temporaryConfig.colors.mid,
+                    '--color-fg': this.$store.state.temporaryConfig.colors.fg,
+                    '--font-mono': this.$store.state.temporaryConfig.fonts.mono,
+                }
+            } else {
+                return {
+                    '--color-bg': this.$store.state.config.colors.bg,
+                    '--color-mid': this.$store.state.config.colors.mid,
+                    '--color-fg': this.$store.state.config.colors.fg,
+                    '--font-mono': this.$store.state.config.fonts.mono,
+                }
             }
+
         }
     },
     components: {
