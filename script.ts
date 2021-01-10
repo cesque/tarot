@@ -37,7 +37,7 @@ let defaults = {
     },
     colors: {
         bg: '#ffffff',
-        mid: '#ffbb00',
+        mid: '#ff0033',
         fg: '#000000',
     },
 }
