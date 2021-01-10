@@ -36,9 +36,9 @@ let defaults = {
         mono: "'Overpass Mono', monospace"
     },
     colors: {
-        bg: '#0a3d62',
-        mid: '#f6b93b',
-        fg: '#b8e994',
+        bg: '#ffffff',
+        mid: '#ffbb00',
+        fg: '#000000',
     },
 }
 
