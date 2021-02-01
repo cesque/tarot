@@ -131,7 +131,6 @@
             },
             cleanURL(urlString) {
                 let url = new URL(urlString)
-                console.log(url)
 
                 let host = url.host.replace(/^www\./, '')
 
