@@ -45,7 +45,7 @@
                         <div class="list-card__card-meaning" v-if="card.card">
                             <div class="list-card__content-header">Meaning</div>
                             <ul class="list-card__meanings">
-                                <li class="list-card__meaning" v-for="meaning in card.card[0].meanings[card.card[1] ? 'upright' : 'reversed']">
+                                <li class="list-card__meaning" v-for="meaning in card.card[0].meanings[card.card[1] ? 'reversed' : 'upright']">
                                     {{ meaning }}
                                 </li>
                             </ul>
@@ -231,7 +231,7 @@
             } else {
                 this.$router.replace('/spreads')
             }
-        }
+        },
         components: {
             Icon,
         }
@@ -345,6 +345,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
 
         &:hover {
             border: 1px dotted var(--color-mid);
