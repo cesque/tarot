@@ -6,6 +6,7 @@ import VueRouter from 'vue-router'
 
 import Tarot from './tarot'
 import DefaultSpreads from './defaultSpreads'
+import ColorThemes from './colorThemes'
 
 import App from './App.vue'
 import Meanings from './pages/Meanings.vue'
@@ -61,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cards: cards,
             spreads: DefaultSpreads,
             siteVersion: packageJSON.version,
+            colorThemes: ColorThemes,
             config: {
                 fonts: {
                     mono: config.fonts.mono

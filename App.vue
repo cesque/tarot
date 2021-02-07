@@ -52,6 +52,8 @@ export default Vue.extend({
         background: var(--color-bg);
         color: var(--color-fg);
 
+        transition: background 0.2s ease-in-out;
+
         min-height: 100vh;
 
         @media (min-width: $breakpoint-lg) {

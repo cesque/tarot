@@ -37,6 +37,28 @@
                         <input class="setting__input" type="color" v-model="config.colors.fg">
                     </div>
                 </div>
+
+                <div class="color-themes">
+                    <a v-on:click="showColorThemes = !showColorThemes"
+                        class="color-themes__toggle">
+                        <span v-if="showColorThemes">Hide</span>
+                        <span v-else>Show</span>
+                        color themes
+                    </a>
+
+                    <div v-if="showColorThemes" class="color-themes__list">
+                        <div class="color-theme" 
+                            v-for="theme in $store.state.colorThemes"
+                            v-bind:style="{
+                                background: theme.colors.bg
+                            }"
+                            v-on:click="config.colors = { ...theme.colors }"
+                        >
+                            <span v-bind:style="{ color: theme.colors.fg }"><b>{{ theme.name }}</b></span>
+                            <span v-bind:style="{ color: theme.colors.mid }"> - midtone</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="setting">
@@ -78,6 +100,7 @@
             return {
                 dirty: false,
                 savedResult: null,
+                showColorThemes: false,
                 config: {
                     fonts: {
                         mono: this.$store.state.config.fonts.mono,
@@ -143,6 +166,9 @@
                 deep: true,
                 handler:function() {
                     this.dirty = true
+                    let c = this.config.colors
+                    // outputs current theme, for adding to colorThemes.mjs easily
+                    // console.log(`{ name: '', colors: { bg: '${c.bg}', mid: '${c.mid}', fg: '${c.fg}' }},`)
                 },
             }
         },
@@ -267,5 +293,41 @@
     text-transform: uppercase;
     padding: 2px 10px;
     padding-top: 4px;
+}
+
+.color-themes__toggle {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    color: var(--color-mid);
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    display: block;
+
+    &:hover {
+        font-weight: bold;
+    }
+}
+
+.color-themes__list {
+    display: flex;
+    flex-direction: column;
+}
+
+.color-theme {
+    padding: 10px 20px;
+    margin-bottom: 2px;
+    cursor: pointer;
+
+    &:hover {
+        // font-style: italic;
+        font-weight: bold;
+
+        b {
+            font-style: italic;
+        }
+    }
 }
 </style>
