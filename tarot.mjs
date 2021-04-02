@@ -110,7 +110,6 @@ export default {
             "willpower",
             "desire",
             "being resourceful",
-            "",
             "skill",
             "ability",
             "concentration",
