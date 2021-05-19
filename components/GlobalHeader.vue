@@ -1,7 +1,7 @@
 <template>
     <div class="global-header">
         <div class="global-nav">
-            <div class="global-nav__item" v-for="element of computedNav">
+            <div class="global-nav__item" v-bind:class="[`global-nav__item--${element.title}`]" v-for="element of computedNav">
                 <div v-if="element.empty"></div>
 
                 <router-link v-else v-bind:to="element.link" >
@@ -91,6 +91,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        align-items: center;
 
         @media (min-width: $breakpoint-lg) {
             flex-direction: column;
@@ -109,6 +110,21 @@
         @media (min-width: $breakpoint-lg) {
             width: 50px;
             height: 50px;
+        }
+    }
+
+    .global-nav__item--meanings {
+        width: 25px;
+        height: 25px;
+
+        @media (min-width: $breakpoint-sm) {           
+            width: 25px;
+            height: 25px;
+        }
+
+        @media (min-width: $breakpoint-lg) {
+            width: 40px;
+            height: 40px;
         }
     }
 
