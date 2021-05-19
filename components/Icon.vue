@@ -12,6 +12,8 @@ export default Vue.extend({
         'name'
     ],
     data() {
+        let suitStrokeWidth = 16
+
         // https://thenounproject.com/divulture/collection/knowledge-kit/
         return {
             icons: {
@@ -117,7 +119,63 @@ export default Vue.extend({
         </g>
     </g>
 </svg>`,
-
+                'cups': `<svg width="100%" height="100%" viewBox="0 0 170 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-199,0)">
+        <g id="cup" transform="matrix(0.944444,0,0,1,-8.77778,0)">
+            <rect x="220" y="0" width="180" height="200" style="fill:none;"/>
+            <g id="Layer2" transform="matrix(1.05882,0,0,1,-28.8235,5)">
+                <g transform="matrix(0.833333,0,0,0.860963,53.3333,-4.97326)">
+                    <path d="M260,180L380,180" style="fill:none;stroke:currentColor;stroke-width:${suitStrokeWidth}px;"/>
+                </g>
+                <g transform="matrix(0.833333,0,0,0.860963,53.3333,25.4474)">
+                    <path d="M320,144.667L320,80" style="fill:none;stroke:currentColor;stroke-width:${suitStrokeWidth}px;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,0,-40)">
+                    <path d="M370,80C370,107.596 347.596,130 320,130C292.404,130 270,107.596 270,80" style="fill:none;stroke:currentColor;stroke-width:${suitStrokeWidth * 0.9}px;"/>
+                </g>
+                <path d="M270,40L370,40" style="fill:none;stroke:currentColor;stroke-width:${suitStrokeWidth * 0.9}px;"/>
+            </g>
+        </g>
+    </g>
+</svg>`,
+                'pentacles': `<svg width="100%" height="100%" viewBox="0 0 170 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-199,-220)">
+        <g id="pentacles" transform="matrix(0.85,0,0,1,12,0)">
+            <rect x="220" y="220" width="200" height="200" style="fill:none;"/>
+            <g transform="matrix(1.17647,0,0,1,-56.4706,10)">
+                <circle cx="320" cy="310" r="50" style="fill:none;stroke:currentColor;stroke-width:${suitStrokeWidth}px;"/>
+            </g>
+        </g>
+    </g>
+</svg>`,
+                'swords': `<svg width="100%" height="100%" viewBox="0 0 120 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-4,0)">
+        <g id="sword" transform="matrix(0.6,0,0,1,4,0)">
+            <rect x="0" y="0" width="200" height="200" style="fill:none;"/>
+            <g id="Layer1" transform="matrix(1.66667,0,0,1,-66.6667,0)">
+                <g transform="matrix(1,0,0,1,1.42109e-14,-15)">
+                    <path d="M70,150L130,150" style="fill:none;stroke:currentColor;stroke-width:${suitStrokeWidth}px;"/>
+                </g>
+                <g transform="matrix(1,0,0,0.875,0,12.5)">
+                    <path d="M100,180L100,20" style="fill:none;stroke:currentColor;stroke-width:${suitStrokeWidth}px;"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>`,
+                'wands': `<svg width="100%" height="100%" viewBox="0 0 128 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,0,-220)">
+        <g id="wand" transform="matrix(0.64,0,0,1,0,0)">
+            <rect x="0" y="220" width="200" height="200" style="fill:none;"/>
+            <g transform="matrix(1.5625,0,0,0.875,-56.25,232.5)">
+                <path d="M100,180L100,20" style="fill:none;stroke:currentColor;stroke-width:${suitStrokeWidth};"/>
+            </g>
+            <g transform="matrix(2.34375,0,0,1.5,-134.375,-120)">
+                <circle cx="100" cy="280" r="20" style="fill:none;stroke:currentColor;stroke-width:${suitStrokeWidth * 0.6}px;"/>
+            </g>
+        </g>
+    </g>
+</svg>`
             }
         }
     }

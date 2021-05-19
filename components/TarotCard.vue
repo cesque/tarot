@@ -13,7 +13,9 @@
 
                 <div class="tarot-card__middle">
                     <div class="tarot-card__symbol">
-                        <div class="tarot-card__suit" v-if="!card.isMajorArcana()">{{ suitSymbol }}</div>
+                        <div class="tarot-card__suit" v-if="!card.isMajorArcana()">
+                            <icon v-bind:name="suitSymbol"></icon>
+                        </div>
                         <div class="tarot-card__number" v-if="!card.isMajorArcana()">{{ card.number }}</div>
 
                         <div class="tarot-card__number" v-if="card.isMajorArcana()">{{ majorArcanaRomanNumeral }}</div>
@@ -33,6 +35,7 @@
     import Vue from 'vue'
     import { Size } from '../models/size'
     import { Suit } from '../models/card'
+    import Icon from '../components/Icon.vue'
 
     export default Vue.extend({
         props: {
@@ -52,7 +55,7 @@
         },
         computed: {
             suitSymbol: function() {
-                return Suit[this.card.suit][0]
+                return ['swords', 'wands', 'cups', 'pentacles'][this.card.suit - 1]
             },
             majorArcanaRomanNumeral: function() {
                 return this.$store.getters.romanNumeral(this.card.number)
@@ -68,7 +71,10 @@
         },
         created: function() {
 
-        }
+        },
+        components: {
+            Icon,
+        },
     })
 </script>
 
@@ -178,9 +184,11 @@
         }
     }
 
+
     .tarot-card__symbol {
         display: flex;
         flex-direction: row;
+        align-items: center;
         font-size: 1.6rem;
 
         .tarot-card--medium & {
@@ -198,6 +206,21 @@
                 font-size: 3rem;
             }
         }
+    }
+
+    .tarot-card__suit {
+        flex-shrink: 0;
+
+        .icon {
+            display: flex;
+            align-items: center;
+            width: auto;
+            height: 70px;
+        }
+    }
+
+    .tarot-card__number {
+        padding-top: 10px;
     }
 
     .tarot-card__reversed {
