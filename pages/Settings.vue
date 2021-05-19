@@ -275,9 +275,19 @@
         height: auto;
         width: auto;
 
+        // doesn't work if i use comma separated selectors???
         &::-webkit-color-swatch {
             border: none;
             padding: 20px;
+        }
+
+        &::-moz-color-swatch {
+            border: none;
+            padding: 20px;
+        }
+
+        &::-moz-color-swatch-wrapper {
+            padding: 0;
         }
 
         &::-webkit-color-swatch-wrapper {
