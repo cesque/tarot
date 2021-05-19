@@ -138,6 +138,7 @@
                     }, 3000)
                 })
 
+                window['setFavicon'](this.config.colors.bg, this.config.colors.fg)
             },
             reset: function(setting) {
                 let from = this.defaults[setting]
@@ -169,6 +170,8 @@
                     let c = this.config.colors
                     // outputs current theme, for adding to colorThemes.mjs easily
                     // console.log(`{ name: '', colors: { bg: '${c.bg}', mid: '${c.mid}', fg: '${c.fg}' }},`)
+
+                    window['setFavicon'](this.config.colors.bg, this.config.colors.fg)
                 },
             }
         },

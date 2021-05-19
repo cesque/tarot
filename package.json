@@ -7,6 +7,7 @@
     "vuex": "^3.5.1"
   },
   "devDependencies": {
+    "@parcel/transformer-vue": "^2.0.0-beta.2",
     "@vue/component-compiler-utils": "^3.1.2",
     "cssnano": "^4.1.10",
     "parcel": "^1.12.4",

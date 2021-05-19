@@ -5,8 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="script.ts"></script>
+    <link rel="icon" type="image/svg+xml" href="">
 </head>
 <body>
     <div id="app"></div>
+    <script>
+        window.setFavicon = function(bg, fg) {
+            let svg = `
+                <svg width="100%" height="100%" viewBox="0 0 400 400" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+                    xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+                    <g id="Artboard11" serif:id="Artboard1">
+                        <rect width="400" height="400" style="fill:${bg}" />
+                        <path d="M200,20l155.885,90l-0,180l-155.885,90l-155.885,-90l0,-180l155.885,-90Z" style="fill:none;stroke:${fg};stroke-width:25px;"/>
+                        <path d="M150,110l100,0" style="fill:none;stroke:${fg};stroke-width:25px;"/>
+                        <g id="Layer1">
+                            <path d="M100,200l200,0" style="fill:none;stroke:${fg};stroke-width:25px;"/>
+                        </g>
+                        <g id="Layer2">
+                            <path d="M44.115,290l311.77,0" style="fill:none;stroke:${fg};stroke-width:25px;"/>
+                        </g>
+                        <g id="Layer3">
+                            <path d="M200,380l0,-360" style="fill:none;stroke:${fg};stroke-width:25px;"/>
+                        </g>
+                    </g>
+                </svg>`;
+            
+            var link = document.querySelector("link[rel~='icon']")
+            link.setAttribute('href', `data:image/svg+xml;base64,${btoa(svg)}`)
+        }
+
+        setFavicon('white', 'black')
+    </script>
 </body>
 </html>

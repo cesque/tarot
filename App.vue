@@ -38,6 +38,9 @@ export default Vue.extend({
     },
     components: {
         GlobalHeader
+    },
+    created: function() {
+        window['setFavicon'](this.$store.state.config.colors.bg, this.$store.state.config.colors.fg)
     }
 })
 </script>
