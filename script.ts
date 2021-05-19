@@ -33,6 +33,7 @@ function makePageTitle(name) {
 }
 
 let defaults = {
+    useColoredFavicon: false,
     fonts: {
         mono: "'Overpass Mono', monospace"
     },
@@ -45,16 +46,20 @@ let defaults = {
 
 let loadedConfig = JSON.parse(localStorage.getItem('config'))
 
-let config = {
-    fonts: {
-        mono: loadedConfig?.fonts?.mono ?? defaults.fonts.mono
-    },
-    colors: {
-        bg: loadedConfig?.colors?.bg ?? defaults.colors.bg,
-        mid: loadedConfig?.colors?.mid ?? defaults.colors.mid,
-        fg: loadedConfig?.colors?.fg ?? defaults.colors.fg,
-    },
-}
+// let config = {
+//     useColoredFavicon: loadedConfig?.useColoredFavicon,
+//     fonts: {
+//         mono: loadedConfig?.fonts?.mono ?? defaults.fonts.mono
+//     },
+//     colors: {
+//         bg: loadedConfig?.colors?.bg ?? defaults.colors.bg,
+//         mid: loadedConfig?.colors?.mid ?? defaults.colors.mid,
+//         fg: loadedConfig?.colors?.fg ?? defaults.colors.fg,
+//     },
+// }
+
+// this line is a way better version of the above
+let config = { ...defaults, ...loadedConfig }
 
 document.addEventListener('DOMContentLoaded', () => {
     const store = new Vuex.Store({
@@ -64,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             siteVersion: packageJSON.version,
             colorThemes: ColorThemes,
             config: {
+                useColoredFavicon: config.useColoredFavicon,
                 fonts: {
                     mono: config.fonts.mono
                 },
@@ -74,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             },
             defaults: {
+                useColoredFavicon: config.useColoredFavicon,
                 fonts: {
                     mono: config.fonts.mono
                 },
@@ -88,6 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
         mutations: {
             saveConfig: (state, config) => {
                 console.log(config)
+                state.config.useColoredFavicon = config.useColoredFavicon
+
                 for(let key in config.colors) {
                     state.config.colors[key] = config.colors[key]
                 }

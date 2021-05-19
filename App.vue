@@ -40,7 +40,9 @@ export default Vue.extend({
         GlobalHeader
     },
     created: function() {
-        window['setFavicon'](this.$store.state.config.colors.bg, this.$store.state.config.colors.fg)
+        if(this.$store.state.config.useColoredFavicon) {
+            window['setFavicon'](this.$store.state.config.colors.bg, this.$store.state.config.colors.fg)
+        }
     }
 })
 </script>

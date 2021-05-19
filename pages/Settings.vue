@@ -63,6 +63,18 @@
 
             <div class="setting">
                 <div class="setting__header">
+                    <div class="setting__title">Colorize favicon</div>
+                    <a class="setting__reset" v-on:click="reset('useColoredFavicon')">(Reset)</a>
+                </div>
+                <div class="setting__list">
+                    <div class="setting__item setting__item--checkbox">
+                        <input class="setting__input" type="checkbox" v-model="config.useColoredFavicon">
+                    </div>
+                </div>
+            </div>
+
+            <div class="setting">
+                <div class="setting__header">
                     <div class="setting__title">Save</div>
                 </div>
                 <div class="setting__list">
@@ -102,6 +114,7 @@
                 savedResult: null,
                 showColorThemes: false,
                 config: {
+                    useColoredFavicon: this.$store.state.config.useColoredFavicon,
                     fonts: {
                         mono: this.$store.state.config.fonts.mono,
                     },
@@ -112,6 +125,7 @@
                     }
                 },
                 defaults: {
+                    useColoredFavicon: this.$store.state.config.useColoredFavicon,
                     fonts: {
                         mono: this.$store.state.defaults.fonts.mono,
                     },
@@ -138,7 +152,9 @@
                     }, 3000)
                 })
 
-                window['setFavicon'](this.config.colors.bg, this.config.colors.fg)
+                if(this.config.useColoredFavicon) {
+                    window['setFavicon'](this.config.colors.bg, this.config.colors.fg)
+                }
             },
             reset: function(setting) {
                 let from = this.defaults[setting]
@@ -165,13 +181,17 @@
         watch: {
             config: {
                 deep: true,
-                handler:function() {
+                handler: function() {
                     this.dirty = true
                     let c = this.config.colors
                     // outputs current theme, for adding to colorThemes.mjs easily
                     // console.log(`{ name: '', colors: { bg: '${c.bg}', mid: '${c.mid}', fg: '${c.fg}' }},`)
 
-                    window['setFavicon'](this.config.colors.bg, this.config.colors.fg)
+                    if(this.config.useColoredFavicon) {
+                        window['setFavicon'](this.config.colors.bg, this.config.colors.fg)
+                    } else {
+                        window['setFavicon']('transparent', 'black')
+                    }
                 },
             }
         },
@@ -292,6 +312,32 @@
 
         &::-webkit-color-swatch-wrapper {
             padding: 0;
+        }
+    }
+}
+
+.setting__item--checkbox {
+    .setting__input {
+        margin: 0;
+        appearance: none;
+        border: 1px solid var(--color-mid);
+        width: 30px;
+        height: 30px;
+        position: relative;
+        cursor: pointer;
+
+        &:checked {
+            &:after {
+                position: absolute;
+                content: '';
+                display: block;
+                top: 3px;
+                bottom: 3px;
+                left: 3px;
+                right: 3px;
+                background: var(--color-fg);
+                z-index: 1;
+            }
         }
     }
 }
