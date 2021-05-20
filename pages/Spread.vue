@@ -130,6 +130,12 @@
                     'grid-template-rows': '1fr '.repeat(height),
                 }
 
+                if (width == 1) {
+                    css['max-width'] = '200px'
+                } else if (width == 2) {
+                    css['max-width'] = '450px'
+                }
+
                 return css
             },
             grid: function() {
@@ -269,6 +275,8 @@
     .spread-grid {
         display: grid;
         grid-gap: 20px;
+        width: 100%;
+        margin: 0 auto;
     }
 
     .spread-cell {
@@ -279,6 +287,7 @@
         justify-content: center;
         padding-bottom: 100%;
         min-height: 150px;
+        max-height: 400px;
     }
 
     .spread-card {
@@ -286,7 +295,6 @@
         border: 1px solid var(--color-fg);
         border-radius: 5px;
         font-family: $font-mono;
-        width: 100vw;
         cursor: pointer;
         max-width: 130px;
         display: flex;

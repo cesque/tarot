@@ -3,19 +3,26 @@
         <div class="content">
             <h2>Spreads</h2>
 
-            <p>here are some tarot spreads you can use to focus your readings. this functionality is in <span class="hl">beta</span>, so there's more spreads to come!</p>
+            <!-- <p>
+                Choose a spread below to draw a reading.
+            </p> -->
 
-            <ul class="spreads-list">
-                <li class="spread" v-for="spread in $store.state.spreads">
-                   <router-link class="spread-link" v-bind:to="'/spread/' + spread.id">{{ spread.name }}</router-link> 
-                </li>
-            </ul>
+            <div class="spreads-group" v-for="group in groups">
+                <div class="spreads-group__header">
+                    <h3 class="spreads-group__title">{{ group.name }}</h3>
+                    <div class="spreads-group__separator"></div>
+                </div>
+                <ul class="spreads-list">
+                    <spread-item v-for="spread in group.spreads" v-bind:spread="spread"></spread-item>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
     import Vue from 'vue'
+    import SpreadItem from '../components/SpreadItem.vue'
 
     import { Spread, SpreadCard } from '../models/spread'
 
@@ -25,36 +32,96 @@
                 
             }
         },
+        computed: {
+            groups: function() {
+                let groups = {}
+
+                for(let spread of this.$store.state.spreads) {
+                    let groupName = spread.group || spread.cards.length
+
+                    if(!groups[groupName]) {
+                        groups[groupName] = {
+                            name: spread.group || `${spread.cards.length} card${spread.cards.length > 1 ? 's' : ''}`,
+                            spreads: [],
+                        }
+                    }
+
+                    groups[groupName].spreads.push(spread)
+
+                }
+
+                return groups
+            }
+        },
         methods: {
 
         },
         components: {
-
+            SpreadItem,
         }
     })
 </script>
 
 <style lang="scss">
+    .spreads-group {
+        margin-top: 70px;
+    }
+
+    .spreads-group__header {
+        display: flex;
+        align-items: center;
+    }
+
+    .spreads-group__title {   
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.1rem;
+        color: var(--color-mid);
+    }
+
+    .spreads-group__separator {
+        background: var(--color-mid);
+        height: 1px;
+        flex-grow: 1;
+        margin-left: 20px;
+    }
+
     .spreads-list {
+        margin: 0;
+        margin-bottom: 40px;
 
-    }
+        padding: 0;
 
-    .spread {
-        margin-bottom: 5px;
-    }
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
 
-    .spread-link {
-        text-decoration: none;
-        color: var(--color-fg);
-        font-weight: bold;
+        @media (min-width: $breakpoint-sm) {
+            grid-template-columns: 1fr 1fr;
+        }
 
-        &:hover {
-            color: var(--color-mid);
+        @media (min-width: $breakpoint-lg) {
+            grid-template-columns: 1fr 1fr 1fr;
         }
     }
 
-    .hl {
-        color: var(--color-mid);
-        font-weight: bold;
-    }
+    // .spread {
+    //     margin-bottom: 5px;
+    //     list-style: none;
+    // }
+
+    // .spread-link {
+    //     text-decoration: none;
+    //     color: var(--color-fg);
+    //     font-weight: bold;
+
+    //     &:hover {
+    //         color: var(--color-mid);
+    //     }
+    // }
+
+    // .hl {
+    //     color: var(--color-mid);
+    //     font-weight: bold;
+    // }
 </style>

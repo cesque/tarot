@@ -52,11 +52,13 @@ export class Spread {
     id: string
     cards: SpreadCard[]
     name: string
+    group: string
     description: string
 
-    constructor(id, name?, description?) {
+    constructor(id, name?, description?, group?) {
         this.id = id
         this.name = name || ''
+        this.group = group || ''
         this.description = description || ''
         this.cards = []
     }
@@ -84,6 +86,7 @@ export class Spread {
 
         spread.name = object.name
         spread.description = object.description
+        spread.group = object.group
 
         return spread
     }
