@@ -1647,7 +1647,8 @@ export default {
       "astrology": "Venus in Cancer",
       "numerology": "2 (The Other: duality, division, debate)",
       "questions": [
-        "How can I make sure that what I'm feeling is mutual?\",\"When was the last time I felt \"in love\" with someone or something?",
+        "How can I make sure that what I'm feeling is mutual?",
+        "When was the last time I felt \"in love\" with someone or something?",
         "What do you need in order to feel emotionally stable?"
       ],
       "fortuneTelling": [
