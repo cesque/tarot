@@ -192,6 +192,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: center;
         font-size: 1.6rem;
 
         .tarot-card--medium & {
@@ -213,14 +214,16 @@
 
     .tarot-card__suit {
         flex-shrink: 0;
+        flex-grow: 0;
 
         .icon {
             display: flex;
             align-items: center;
-            width: auto;
+            width: 35px;
             height: 35px;
 
             @media (min-width: $breakpoint-lg) {
+                width: 58px;
                 height: 58px;
             }
         }
