@@ -22,7 +22,7 @@
             </div>
 
             <div v-if="!hasDrawn" class="spread-button-container">
-                <button type="button" class="spread-button" v-on:click="draw()">Draw Cards</button>
+                <button type="button" class="spread-button" v-on:click="draw()">Draw Card{{ spread.cards.length > 1 ? 's' : '' }}</button>
             </div>
         </div>
         <div class="spread-page spread-page--list">
