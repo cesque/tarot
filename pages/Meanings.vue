@@ -65,6 +65,7 @@
                 <div class="information__list">
                     <a v-bind:href="labyrinthosLink" class="information__text information__text--link" target="_blank">{{ cleanURL(labyrinthosLink) }}</a>
                     <a v-bind:href="biddyLink" class="information__text information__text--link" target="_blank">{{ cleanURL(biddyLink) }}</a>
+                    <a v-bind:href="busterBensonLink" class="information__text information__text--link" target="_blank">busterbenson.com</a>
                 </div>
             </div> 
         </div>
@@ -78,7 +79,7 @@
     import TarotCard from '../components/TarotCard.vue'
     import Icon from '../components/Icon.vue'
 
-    import { Card } from '../models/card'
+    import { Card, Suit } from '../models/card'
     import { Size } from '../models/size'
 
     export default Vue.extend({
@@ -170,7 +171,6 @@
                 return this.card.meanings[this.isReversed ? 'reversed' : 'upright']
             },
             labyrinthosLink: function() {
-                // might rewrite link behaviour
                 let name = this.card.name
                 if(name == 'Wheel of Fortune') name = 'The ' + name // labyrinthos link for WoF has 'The'
 
@@ -179,7 +179,6 @@
                 return `https://labyrinthos.co/blogs/tarot-card-meanings-list/${slug}-meaning-${this.card.isMajorArcana() ? 'major-arcana-' : ''}tarot-card-meanings`
             },
             biddyLink: function() {
-                // might rewrite link behaviour
                 let name = this.card.name
 
                 name = name.replace(/^[Tt]he\s*/, '')
@@ -192,6 +191,16 @@
                     return `https://www.biddytarot.com/tarot-card-meanings/minor-arcana/suit-of-${this.card.suitName().toLowerCase()}/${slug}/`
                 }
 
+            },
+            busterBensonLink: function() {
+                let suit = this.card.suitName().toLowerCase()
+                if(this.card.suit == Suit.Pentacles) {
+                    suit = 'coins'
+                }
+
+                let slug = `${this.card.isMajorArcana() ? 'major' : suit }-${this.card.number.toString().padStart(2, '0')}`
+
+                return `https://notes.busterbenson.com/tarot/${slug}`
             }
         },
         components: {
