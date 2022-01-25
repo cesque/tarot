@@ -118,7 +118,7 @@ spreads.push({
 
 function simple2CardCrossGenerator(card1, card2) {
     return {
-        id: slugify(`situation challenge`),
+        id: slugify(`${card1}, ${card2}`),
         group: `Cross`,
         cards: [
             {
