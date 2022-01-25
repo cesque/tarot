@@ -220,22 +220,64 @@
                 this.hasDrawn = true;
                 this.spread.draw(this.$store.state.cards);
 
-                console.log(this.spread)
+                let spreadCardsURL = this.spread.cards.map(spreadCard => {
+                    let result = spreadCard.card[0].id
+                    if(spreadCard.card[1]) result += '-r'
+                    return result
+                })
+
+                window.history.replaceState({}, document.title, `/#/spread/${ this.spread.id }/${ spreadCardsURL.join('/') }`)
             }
         },
         created: function() {
             let params = this.$route.params
 
-            if(params.id) {
-                let spread = this.$store.state.spreads.find(x => x.id == params.id)
-
-                if(spread) {
-                    this.spread = spread
-                } else {
-                    this.$router.replace('/spreads')
-                }
-            } else {
+            if(!params.id) {
                 this.$router.replace('/spreads')
+                return
+            }
+            
+            let spread = this.$store.state.spreads.find(x => x.id == params.id)
+
+            if(!spread) {
+                this.$router.replace('/spreads')
+                return
+            }
+            this.spread = spread
+            this.spread.reset()
+
+            // try to load drawn cards from url
+            try {
+                if(this.$route.params.pathMatch) {
+
+                    let parts = this.$route.params.pathMatch.split('/')
+                    parts = parts.filter(x => x.trim().length > 0)
+
+                    if(parts.length == this.spread.cards.length) {
+
+
+                        for(let i = 0; i < parts.length; i++) {
+                            let cardName = parts[i]
+
+                            let cardParts = parts[i].split('-')
+                            console.log(cardName, cardParts)
+
+                            let first = cardParts[0].toLowerCase()
+                            let card = this.$store.state.cards.find(card => card.id == first)                                
+                            let reversed = cardParts.length > 1 && cardParts[1] == 'r'
+
+                            if(!card) throw `no card found for id ${ cardName }`
+
+                            this.spread.cards[i].set(card, reversed)
+                        }
+
+                        this.hasDrawn = true;
+                    } else {
+                        throw `incorrect number of drawn cards in url for spread`
+                    }
+                }
+            } catch(e) {
+                console.warn(e)
             }
         },
         components: {

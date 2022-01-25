@@ -21,6 +21,10 @@ export class SpreadCard {
         this.card = [drawn, Math.round(Math.random()) > 0.5]
     }
 
+    set(card, reversed) {
+        this.card = [card, reversed]
+    }
+
     static fromObject(object: any) {
         let card = new SpreadCard()
 
@@ -65,6 +69,12 @@ export class Spread {
 
     addCard(card: SpreadCard) {
         this.cards.push(card)
+    }
+
+    reset() {
+        for(let card of this.cards) {
+            card.card = undefined
+        }
     }
 
     draw(deck) {

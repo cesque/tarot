@@ -194,6 +194,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             },
             {
+                path: '/spread/:id/*',
+                component: Spread,
+                meta: {
+                    title: makePageTitle('spread')
+                }
+            },
+            {
                 path: '/about',
                 component: About,
                 meta: {
