@@ -23,7 +23,8 @@
   "version": "0.5.1",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx parcel start index.html",
+    "build": "npx parcel build index.html --public-url=./"
   },
   "repository": {
     "type": "git",
