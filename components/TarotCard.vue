@@ -14,11 +14,9 @@
                 <div class="tarot-card__middle">
                     <div class="tarot-card__symbol">
                         <div class="tarot-card__suit" v-if="!card.isMajorArcana()">
-                            <icon v-bind:name="suitSymbol"></icon>
+                            <icon v-bind:name="card.suitSymbol()"></icon>
                         </div>
-                        <div class="tarot-card__number" v-if="!card.isMajorArcana()">{{ numberSymbol }}</div>
-
-                        <div class="tarot-card__number" v-if="card.isMajorArcana()">{{ majorArcanaRomanNumeral }}</div>
+                        <div class="tarot-card__number">{{ card.symbol() }}</div>
                     </div>
                     <div class="tarot-card__reversed" v-if="reversed">reversed</div>
                 </div>
@@ -54,15 +52,6 @@
             }
         },
         computed: {
-            suitSymbol: function() {
-                return ['swords', 'wands', 'cups', 'pentacles'][this.card.suit - 1]
-            },
-            numberSymbol: function() {
-                return ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'P', 'N', 'Q', 'K'][this.card.number - 1]
-            },
-            majorArcanaRomanNumeral: function() {
-                return this.$store.getters.romanNumeral(this.card.number)
-            },
             sizeValue: function() {
                 return this.size as Size
             }

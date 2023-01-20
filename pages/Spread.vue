@@ -31,11 +31,24 @@
             <ol class="spread-list">
                 <li class="list-card" v-for="card in spread.cards">
                     <div class="list-card__header">
-                        <div class="list-card__number">{{ $store.getters.romanNumeral(card.number) }}</div>
-                        <div class="list-card__name">{{ card.name }}</div>
+                        <div class="list-card__header-part list-card__header-part--name">
+                            <div class="list-card__number">{{ $store.getters.romanNumeral(card.number) }}</div>
+                            <div class="list-card__name">{{ card.name }}</div>
+                        </div>
                         <div class="list-card__separator"></div>
-                        <div class="list-card__card-name" v-if="card.card">{{ card.card[0].name }}</div>
-                        <div class="list-card__card-reversed" v-if="card.card && card.card[1]">Reversed</div>
+                        <div class="list-card__header-part list-card__header-part--card" v-if="card.card">
+                            <div class="list-card__card-info">
+                                <div class="list-card__card-name">{{ card.card[0].name }}</div>
+                                <div class="list-card__card-reversed" v-if="card.card[1]">Reversed</div>
+                            </div>
+                            <div class="list-card__card-symbol">
+                                <div class="list-card__card-suit" v-if="!card.card[0].isMajorArcana()">
+                                    <icon v-bind:name="card.card[0].suitSymbol()"></icon>
+                                </div>
+                                <div class="list-card__card-number">{{ card.card[0].symbol() }}</div>
+                                <div class="list-card__card-suit-reversed" v-if="card.card[1]">R</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="list-card__content">
                         <div class="list-card__content-header" v-if="card.description">Description</div>
@@ -334,6 +347,7 @@
 
     .spread-card {
         position: absolute;
+        overflow: hidden;
         border: 1px solid var(--color-fg);
         border-radius: 5px;
         font-family: $font-mono;
@@ -370,6 +384,15 @@
         font-size: 0.8rem;
         color: var(--color-mid);
         letter-spacing: 0.1rem;
+    }
+
+    .spread-card__name {
+        font-size: 0.8rem;
+        margin-top: 5px;
+
+        @media (min-width: $breakpoint-lg) {
+            font-size: 1rem;
+        }
     }
 
 
@@ -436,8 +459,32 @@
 
     .list-card__header {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        gap: 10px;
+
+        @media (min-width: $breakpoint-lg) {
+            flex-direction: row;
+            align-items: baseline;
+        }
+    }
+
+    .list-card__header-part {
+        display: flex;
+        gap: 10px;
         align-items: baseline;
+    }
+
+    .list-card__header-part--name {
+
+    }
+
+    .list-card__header-part--card {
+        justify-content: space-between;
+        align-items: flex-start;
+
+        @media (min-width: $breakpoint-lg) {
+            
+        }
     }
 
     .list-card__number {
@@ -445,8 +492,6 @@
         font-size: 0.8rem;
         color: var(--color-mid);
         letter-spacing: 0.1rem;
-        margin-right: 10px;
-        min-width: 40px;
         text-align: right;
     }
 
@@ -454,8 +499,18 @@
         flex-grow: 1;
         height: 1px;
         background: var(--color-mid);
-        align-self: center;
-        margin: 0 20px;
+        align-self: stretch;
+
+        @media (min-width: $breakpoint-lg) {
+            align-self: center;
+        }
+    }
+
+    .list-card__card-info {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        flex-wrap: wrap;
     }
 
     .list-card__card-name {
@@ -467,13 +522,44 @@
         font-size: 0.8rem;
         color: var(--color-mid);
         letter-spacing: 0.1rem;
-        margin-left: 20px;
+        leading-trim: both;
+    }
+
+    .list-card__card-symbol {
+        display: flex;
+        align-items: center;
+    }
+
+    .list-card__card-suit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+
+        transform: translateY(-2px);
+    }
+
+    .list-card__card-suit .icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .list-card__card-suit-reversed {
+        text-transform: uppercase;
+        color: var(--color-mid);
+        letter-spacing: 0.1rem;
+        leading-trim: both;
+        margin-left: 3px;
+    }
+
+    .list-card__card-number {
+
     }
 
     .list-card__content {
-        margin: 20px 20px;
+        margin: 20px 0;
 
-        @media (min-width: $breakpoint-sm) {
+        @media (min-width: $breakpoint-lg) {
             margin: 20px 40px;
         }
     }
@@ -492,8 +578,14 @@
 
     .list-card__meanings {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        margin-bottom: 10px;
+        grid-template-columns: 1fr;
+        margin: 10px;
+        padding-left: 10px;
+        list-style-position: outside;
+
+        @media (min-width: $breakpoint-sm) {
+            grid-template-columns: 1fr 1fr;
+        }
     }
 
     .list-card__meaning {

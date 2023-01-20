@@ -40,6 +40,48 @@ export class Card {
         return Suit[+this.suit]
     }
 
+    suitSymbol() {
+        return ['swords', 'wands', 'cups', 'pentacles'][this.suit - 1]
+    }
+
+    numberSymbol() {
+        return ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'P', 'N', 'Q', 'K'][this.number - 1]
+    }
+    
+    majorArcanaRomanNumeral() {
+        let n = this.number
+
+        if (n == 0) {
+            return '0'
+        }
+
+        const lookup = [
+            { symbol: 'X', number: 10 },
+            { symbol: 'IX', number: 9 },
+            { symbol: 'V', number: 5 },
+            { symbol: 'IV', number: 4 },
+            { symbol: 'I', number: 1 },
+        ]
+
+        let roman = ''
+        for (let pair of lookup) {
+            while (n >= pair.number) {
+                roman += pair.symbol
+                n -= pair.number
+            }
+        }
+
+        return roman
+    }
+
+    symbol() {
+        if(this.isMajorArcana()) {
+            return this.majorArcanaRomanNumeral()
+        } else {
+            return this.numberSymbol()
+        }
+    }
+
     static fromObject(object: any) {
         let card: Card = new Card()
         card.id = object.id
