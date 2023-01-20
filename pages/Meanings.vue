@@ -266,6 +266,7 @@
         text-transform: uppercase;
         font-size: 0.8rem;
         color: var(--color-mid);
+        white-space: nowrap;
 
         @media (min-width: $breakpoint-lg) {
             bottom: 15px;
@@ -300,6 +301,7 @@
         flex-direction: column;
         align-items: center;
         padding: 20px;
+        text-align: center;
 
         @media (min-width: $breakpoint-sm) {
             align-items: flex-start;
