@@ -3918,7 +3918,7 @@ export default {
       "astrology": "Mercury in Sagittarius",
       "numerology": "8 (The Action: movement, outer work, swiftness)",
       "questions": [
-        "How quickly to you adapt to change?",
+        "How quickly do you adapt to change?",
         "What would your response be to overwhelming, sudden change?",
         "What changes are on your horizon? How well have you prepared for them?"
       ],
