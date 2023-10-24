@@ -200,7 +200,7 @@
 
                 let slug = `${this.card.isMajorArcana() ? 'major' : suit }-${this.card.number.toString().padStart(2, '0')}`
 
-                return `https://notes.busterbenson.com/tarot/${slug}`
+                return `https://busterbenson.com/tarot/${slug}`
             }
         },
         components: {
